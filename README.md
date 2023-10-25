@@ -25,3 +25,15 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+const validatorMap = {
+  min: (value: number) => Validators.min(value),
+  max: (value: number) => Validators.max(value),
+  required: (value: boolean) => value ? Validators.required : null,
+  requiredTrue: (value: boolean) => value ? Validators.requiredTrue : null,
+  email: (value: boolean) => value ? Validators.email : null,
+  minLength: (value: number) => Validators.minLength(value),
+  maxLength: (value: number) => Validators.maxLength(value),
+  pattern: (value: string) => Validators.pattern(value),
+  nullValidator: (value: boolean) => value ? Validators.nullValidator : null,
+};

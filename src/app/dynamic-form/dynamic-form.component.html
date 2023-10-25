@@ -1,0 +1,24 @@
+<form [formGroup]="dynamicFormGroup" class="row g-3">
+  <ng-container *ngFor="let control of formControls">
+    <div *ngIf="['text', 'email', 'password'].includes(control.type)" class="col-md-6">
+      <label for="inputEmail4" class="form-label">{{control.label}}</label>
+      <input formControlName= "{{control?.name}}" [type]="control?.type" class="form-control" [id]="control.name">
+      <small *ngIf="dynamicFormGroup.get(control.name)?.invalid && dynamicFormGroup.get(control.name)?.touched" class="text-danger">{{getErrorMessage(control)}}</small>
+    </div>
+
+    <div *ngIf="control.type === 'select'" class="col-md-4">
+      <label for="inputState" class="form-label">{{control.label}}</label>
+      <select formControlName = {{control?.name}} [id]="control.name" class="form-select">
+        <option selected value="">Choose...</option>
+        <ng-container *ngFor="let row of control.options">
+          <option [ngValue]="row.id">{{row.value}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </ng-container>
+
+  <div class="col-12">
+    <button (click)="onSubmit()" type="submit" class="btn btn-primary">Sign in</button>
+  </div>
+</form>
+<span>{{ formControls.validators | json }}</span>
